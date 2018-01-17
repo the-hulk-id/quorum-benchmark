@@ -1,0 +1,28 @@
+{
+  "name": "ethereum-benchmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {},
+  "keywords": [
+    "Blockchain",
+    "Benchmark"
+  ],
+  "author": "WS3",
+  "license": "",
+  "devDependencies": {
+    "array-range": "^1.0.1",
+    "asyncawait": "^1.0.6",
+    "bignumber": "^1.1.0",
+    "child_process": "^1.0.2",
+    "cluster": "^0.7.7",
+    "eslint": "^4.15.0",
+    "http": "0.0.0",
+    "moment": "^2.20.1",
+    "node-async-loop": "^1.2.2",
+    "randomstring": "^1.1.5",
+    "read-data": "^1.1.0",
+    "web3": "^0.20.1",
+    "write-json": "^2.0.0"
+  }
+}
