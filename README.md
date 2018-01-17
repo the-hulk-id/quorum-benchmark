@@ -24,7 +24,7 @@ https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 # build and run Docker
 cd ethereum_docker/
 docker build -t ethereum .
-docker run --name ethereum -p 22000:22000 -v $HOME/blockchain-benchmark/ethereum_script:/ethereum_script -it ethereum
+docker run --name ethereum -p 22000:22000 -v $HOME/ethereum-benchmark/ethereum_script:/ethereum_script -it ethereum
 
 # Run Ethereum Node in Container
 ./start.sh
@@ -36,7 +36,7 @@ docker run --name ethereum -p 22000:22000 -v $HOME/blockchain-benchmark/ethereum
 # build and run Docker
 cd quorum_docker/
 docker build -t quorum .
-docker run --name quorum -p 22000:22000 -v $HOME/blockchain-benchmark/quorum_script:/quorum_script -it quorum
+docker run --name quorum -p 22000:22000 -v $HOME/ethereum-benchmark/quorum_script:/quorum_script -it quorum
 
 # Run Quorum Node in Container
 ./start.sh
