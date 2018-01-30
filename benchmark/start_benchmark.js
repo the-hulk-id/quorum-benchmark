@@ -5,7 +5,8 @@ var bytecode = header.settings.bytecode;
 
 var WriteReadContract = header.web3.eth.contract(ABI);
 
-var size = [Math.pow(2, 8), Math.pow(2, 9), Math.pow(2, 10), Math.pow(2, 11), Math.pow(2, 12), Math.pow(2, 13), Math.pow(2, 14)];
+//var size = [Math.pow(2, 8), Math.pow(2, 9), Math.pow(2, 10), Math.pow(2, 11), Math.pow(2, 12), Math.pow(2, 13), Math.pow(2, 14)];
+var size = [256, 512];
 
 var numOfTx = 10;
 

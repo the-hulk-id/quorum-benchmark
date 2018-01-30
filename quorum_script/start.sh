@@ -83,14 +83,14 @@ PRIVATE_CONFIG=tm3.conf nohup geth --datadir qdata/dd3 $GLOBAL_ARGS --permission
 echo "[*] Starting node 4 (permissioned)"
 PRIVATE_CONFIG=tm4.conf nohup geth --datadir qdata/dd4 $GLOBAL_ARGS --permissioned --raftport 50404 --rpcport 22003 --port 21003 2>>qdata/logs/4.log &
 
-echo "[*] Starting node 5 (unpermissioned)"
-PRIVATE_CONFIG=tm5.conf nohup geth --datadir qdata/dd5 $GLOBAL_ARGS --raftport 50405 --rpcport 22004 --port 21004 2>>qdata/logs/5.log &
+# echo "[*] Starting node 5 (unpermissioned)"
+# PRIVATE_CONFIG=tm5.conf nohup geth --datadir qdata/dd5 $GLOBAL_ARGS --raftport 50405 --rpcport 22004 --port 21004 2>>qdata/logs/5.log &
 
-echo "[*] Starting node 6 (unpermissioned)"
-PRIVATE_CONFIG=tm6.conf nohup geth --datadir qdata/dd6 $GLOBAL_ARGS --raftport 50406 --rpcport 22005 --port 21005 2>>qdata/logs/6.log &
+# echo "[*] Starting node 6 (unpermissioned)"
+# PRIVATE_CONFIG=tm6.conf nohup geth --datadir qdata/dd6 $GLOBAL_ARGS --raftport 50406 --rpcport 22005 --port 21005 2>>qdata/logs/6.log &
 
-echo "[*] Starting node 7 (unpermissioned)"
-PRIVATE_CONFIG=tm7.conf nohup geth --datadir qdata/dd7 $GLOBAL_ARGS --raftport 50407 --rpcport 22006 --port 21006 2>>qdata/logs/7.log &
+# echo "[*] Starting node 7 (unpermissioned)"
+# PRIVATE_CONFIG=tm7.conf nohup geth --datadir qdata/dd7 $GLOBAL_ARGS --raftport 50407 --rpcport 22006 --port 21006 2>>qdata/logs/7.log &
 
 echo "[*] Waiting for nodes to start"
 sleep 10
