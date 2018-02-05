@@ -1,4 +1,4 @@
-FROM jpiel/xenial64
+FROM ubuntu
 MAINTAINER Sakkarin Saysai
 
 ENV GOREL=go1.7.3.linux-amd64.tar.gz
@@ -7,6 +7,7 @@ ENV CREL=constellation-0.2.0-ubuntu1604
 
 RUN apt-get update &&  apt-get install -y
 RUN apt-get install -y software-properties-common python-software-properties wget git psmisc build-essential unzip libdb-dev libleveldb-dev libsodium-dev zlib1g-dev libtinfo-dev sysvbanner wrk
+RUN apt-get install curl -y && curl -sL https://deb.nodesource.com/setup_8.x | bash && apt-get install nodejs
 
 RUN add-apt-repository -y ppa:ethereum/ethereum &&  apt-get update && apt-get install -y solc
 RUN wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.2.0/$CREL.tar.xz && tar xfJ $CREL.tar.xz
