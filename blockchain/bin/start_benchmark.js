@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { fork } from 'child_process';
 
-let numOfProcess = 1;
-let numOfTx = 10;
-let size = 10;
+let numOfProcess = 5;
+let numOfTx = 20;
+let size = 3072;
 
 let countProcess = 0;
 let sendCompleteResult = 0;
