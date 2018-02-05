@@ -45,12 +45,13 @@ var startTime = new Date().getTime();
 sendTx();
 
 function sendTx() {
+  // console.log(account);
   Benchmark.deployed().then(function(instance) {
     let data = randomstring.generate(size);
-    console.log(data);
+    // console.log(data);
     timeStart = new Date().getTime();
     instance.writeData
-      .sendTransaction(data, 0, { from: account })
+      .sendTransaction(data, 0, { from: account, gas: '50000000' })
       .then(function(txhash) {
         // console.log(txhash);
         timeEnd = new Date().getTime();
@@ -69,13 +70,13 @@ function sendTx() {
 
         var event = instance.FinishWrite();
         event.watch(function(error, events) {
-          console.log(events.args.data);
+          // console.log(events.args.data);
           if (events.args.data == data) {
             timeEnd = new Date().getTime();
             // console.log('Complete tx: ' + (timeEnd - timeStart) / 1000);
             totalTimeComplete += (timeEnd - timeStart) / 1000;
             count++;
-            // console.log(count);
+            console.log(count);
             if (count == numOfTx) {
               var completeTime = new Date().getTime();
               // console.log('Total time: ' + (completeTime - startTime) / 1000);
