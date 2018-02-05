@@ -17,6 +17,8 @@ nohup.out
 ethereum_script/nohup.out
 quorum_script/nohup.out
 
+build/
+
 # OSX
 #
 .DS_Store

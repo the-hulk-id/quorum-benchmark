@@ -15,7 +15,7 @@ if [ $NODE != "" ]; then
 	cp nodekey/nodekey$NODE qdata/dd$NODE/geth/nodekey
 	geth --datadir qdata/dd$NODE init genesis.json
 
-	GLOBAL_ARGS="--raft --rpc --rpccorsdomain "http://172.17.0.1:8888" --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum --emitcheckpoints"
+	GLOBAL_ARGS="--raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum --emitcheckpoints"
 
 	echo "[*] Starting Constellation nodes"
 	nohup constellation-node tm$NODE.conf 2>> qdata/logs/constellation$NODE.log &

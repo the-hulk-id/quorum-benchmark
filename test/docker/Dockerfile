@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM jpiel/xenial64
 MAINTAINER Sakkarin Saysai
 
 ENV GOREL=go1.7.3.linux-amd64.tar.gz
@@ -22,4 +22,4 @@ RUN cd quorum && git checkout tags/v2.0.0 && make all && cp build/bin/geth /usr/
 RUN wget -q https://github.com/jpmorganchase/quorum/releases/download/v1.2.0/porosity
 RUN mv porosity /usr/local/bin && chmod 0755 /usr/local/bin/porosity
 
-ENTRYPOINT cd quorum_script && ./start.sh
+ENTRYPOINT cd quorum_script && /bin/bash

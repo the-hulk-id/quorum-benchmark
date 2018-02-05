@@ -15,6 +15,6 @@ var Web3 = require("web3");
 if (typeof module.exports.web3 !== "undefined") {
 	module.exports.web3 = new Web3(module.exports.web3.currentProvider);
 } else {
-	module.exports.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:22000"));
+	module.exports.web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.3.98:22000"));
 	// console.log(module.exports.web3.isConnected());
 }
