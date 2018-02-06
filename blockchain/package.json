@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "benchmark for quorum network",
   "scripts": {
+    "pub": "babel-node ./bin/publisher.js",
+    "sub": "babel-node ./bin/subscriber.js",
     "benchmark": "babel-node ./bin/start_benchmark.js",
     "compile": "truffle compile",
     "didbus": "babel-node ./bin/didbus.js",
@@ -26,6 +28,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "ethereum-encryption": "0.0.3",
     "randomstring": "^1.1.5",
+    "redis": "^2.8.0",
     "truffle-contract": "^1.0.5",
     "web3": "^0.20.1",
     "yargs": "^6.6.0"

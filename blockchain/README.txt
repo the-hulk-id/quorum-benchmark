@@ -42,3 +42,10 @@ To create response
   --user 4 \
   --userid 11111 \
   --rid 0
+
+
+  npm run pub \
+  -- benchmark \
+  --numOfProcess 5 \
+  --txPerProcess 5 \
+  --size 1024 
