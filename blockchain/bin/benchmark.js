@@ -3,7 +3,7 @@ import { default as Web3 } from 'web3';
 import { default as truffleContract } from 'truffle-contract';
 import { default as randomstring } from 'randomstring';
 
-const RPC_HOST = 'localhost';
+const RPC_HOST = '192.168.3.98';
 const RPC_PORT = '22000';
 
 var argv = require('minimist')(process.argv.slice(2));
