@@ -1,5 +1,4 @@
 FROM ubuntu
-MAINTAINER Sakkarin Saysai
 
 ENV GOREL=go1.7.3.linux-amd64.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin

@@ -1,49 +1,55 @@
-import { default as Did } from './lib/did';
+#!/usr/bin/env node
 import { default as Web3 } from 'web3';
-import { default as contract } from 'truffle-contract';
+import { default as truffleContract } from 'truffle-contract';
 
-var requestJson,requestsJson,responseJson,userJson
-    ,conditionJson,userDirectoryJson;
+const RPC_HOST = '192.168.3.98';
+const RPC_PORT = '22000';
+
+var benchmarkJSON;
 try {
-  requestJson = require('./build/contracts/Request.json');
-  responseJson = require('./build/contracts/Response.json');
-  requestsJson = require('./build/contracts/Requests.json');
-  userJson = require('./build/contracts/User.json');
-  conditionJson = require('./build/contracts/Condition.json');
-  userDirectoryJson = require('./build/contracts/UserDirectory.json');
-}
-catch(error) {
-  requestJson = require('./contracts/Request.json');
-  responseJson = require('./contracts/Response.json');
-  requestsJson = require('./contracts/Requests.json');
-  userJson = require('./contracts/User.json');
-  conditionJson = require('./contracts/Condition.json');
-  userDirectoryJson = require('./contracts/UserDirectory.json');
+  benchmarkJSON = require('./build/contracts/Benchmark.json');
+} catch (error) {
+  benchmarkJSON = require('./contracts/Benchmark.json');
 }
 
-const Request = contract(requestJson);
-const Response = contract(responseJson);
-const Requests = contract(requestsJson);
-const User = contract(userJson);
-const Condition = contract(conditionJson);
-const UserDirectory = contract(userDirectoryJson);
+let provider = new Web3.providers.HttpProvider(
+  `http:\/\/${RPC_HOST}:${RPC_PORT}`
+);
+let web3 = new Web3(provider);
 
-export default function (host, port, requestsAddress
-                        , fromAddress, additionalArgs) {
-  let provider = new Web3.providers.HttpProvider(`http:\/\/${host}:${port}`);
-  let did = new Did (
-      Requests,
-      requestsAddress,
-      provider,
-      fromAddress,
-      {
-        Request,
-        Response,
-        User,
-        Condition,
-        UserDirectory,
-        ...additionalArgs
-      }
-  );
-  return did;
+var account = web3.eth.accounts[0];
+let Benchmark = truffleContract(benchmarkJSON);
+Benchmark.setProvider(provider);
+
+Benchmark.deployed().then(function(instance) {
+  var event = instance.FinishWrite();
+  event.watch(function(error, events) {
+    console.log(
+      'event|' +
+        events.args.sequence.valueOf() +
+        '|' +
+        events.args.data.valueOf().length +
+        '|' +
+        new Date().getTime()
+    );
+  });
+});
+
+function createTransaction(seq, data) {
+  console.log('sendTx|' + seq + '|' + data.length + '|' + new Date().getTime());
+  Benchmark.deployed().then(function(instance) {
+    instance.writeData
+      .sendTransaction(seq, data, { from: account, gas: '50000000' })
+      .then(function(txhash) {
+        console.log(
+          'sendComplete|' + seq + '|' + data.length + '|' + new Date().getTime()
+        );
+      });
+  });
 }
+
+export const quorumInterface = {
+  createTransaction
+};
+
+export default quorumInterface;
