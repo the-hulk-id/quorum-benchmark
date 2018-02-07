@@ -19,6 +19,8 @@ quorum_script/nohup.out
 
 build/
 
+contract_addresses.json
+
 # OSX
 #
 .DS_Store
