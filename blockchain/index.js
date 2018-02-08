@@ -2,7 +2,15 @@
 import { default as Web3 } from 'web3';
 import { default as truffleContract } from 'truffle-contract';
 
-const RPC_HOST = '192.168.3.98';
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/result.csv', { flags: 'a' });
+
+function logger(d) {
+  log_file.write(util.format(d) + '\n');
+}
+
+const RPC_HOST = '192.168.100.98';
 const RPC_PORT = '22000';
 
 var benchmarkJSON;
@@ -24,25 +32,25 @@ Benchmark.setProvider(provider);
 Benchmark.deployed().then(function(instance) {
   var event = instance.FinishWrite();
   event.watch(function(error, events) {
-    console.log(
-      'event|' +
+    logger(
+      new Date().getTime() +
+        '|' +
         events.args.sequence.valueOf() +
         '|' +
         events.args.data.valueOf().length +
-        '|' +
-        new Date().getTime()
+        '|event'
     );
   });
 });
 
 function createTransaction(seq, data) {
-  console.log('sendTx|' + seq + '|' + data.length + '|' + new Date().getTime());
+  logger(new Date().getTime() + '|' + seq + '|' + data.length + '|sendTx');
   Benchmark.deployed().then(function(instance) {
     instance.writeData
       .sendTransaction(seq, data, { from: account, gas: '50000000' })
       .then(function(txhash) {
-        console.log(
-          'sendComplete|' + seq + '|' + data.length + '|' + new Date().getTime()
+        logger(
+          new Date().getTime() + '|' + seq + '|' + data.length + '|sendComplete'
         );
       });
   });

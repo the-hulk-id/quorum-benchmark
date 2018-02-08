@@ -24,6 +24,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "ethereum-encryption": "0.0.3",
     "express": "^4.16.2",
+    "modern-syslog": "^1.1.4",
     "random-js": "^1.0.8",
     "randomstring": "^1.1.5",
     "redis": "^2.8.0",

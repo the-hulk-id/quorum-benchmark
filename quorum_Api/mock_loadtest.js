@@ -4,7 +4,7 @@ var random = require('random-js')();
 
 var size = [128, 512, 1024];
 
-for (let i = 1; i <= 100; i++) {
+for (let i = 1; i <= 10; i++) {
   var options = {
     url: 'http://localhost:8181/send_all/' + i,
     method: 'POST',
