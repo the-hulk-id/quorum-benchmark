@@ -12,8 +12,8 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   USER=`echo $i | jq -r .user`
   IP=`echo $i | jq -r .ip`
 
-  scp -r $PWD/blockchain/index.js $USER@$IP:~/ethereum-benchmark/blockchain/index.js
-  scp -r $PWD/blockchain/truffle.js $USER@$IP:~/ethereum-benchmark/blockchain/truffle.js
+  # scp -r $PWD/blockchain/index.js $USER@$IP:~/ethereum-benchmark/blockchain/index.js
+  # scp -r $PWD/blockchain/truffle.js $USER@$IP:~/ethereum-benchmark/blockchain/truffle.js
 
   if [ $ID -eq 1 ]
   then

@@ -19,14 +19,15 @@ const app = express();
 // --- plaintext ---
 app.use(bodyParser.text({ type: '*/*' }));
 
-var limiter = new RateLimit({
-  delayAfter: 1,
-  delayMs: 1,
-  max: 1000
-});
+// --- TODO use limiter ---
+// var limiter = new RateLimit({
+//   delayAfter: 1,
+//   delayMs: 1,
+//   max: 1000
+// });
 
-//  apply to all requests
-app.use(limiter);
+// app.use(limiter);
+// --- TODO use limiter ---
 
 app.post('/send_all/:seq', (req, res) => {
   var seq = req.params.seq;
