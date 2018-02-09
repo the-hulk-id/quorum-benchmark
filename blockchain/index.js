@@ -56,9 +56,10 @@ function createTransaction(seq, data) {
     instance.writeData
       .sendTransaction(seq, data, { from: account, gas: '50000000' })
       .then(function(txhash) {
-        console.log(
-          new Date().getTime() + '|' + seq + '|' + data.length + '|gotTx'
-        );
+        now = moment()
+          .tz('Asia/Bangkok')
+          .format('YYMMDDHHmmss.SSS');
+        console.log(new now() + '|' + seq + '|' + data.length + '|gotTx');
       });
   });
 }

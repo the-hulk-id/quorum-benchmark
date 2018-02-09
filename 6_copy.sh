@@ -12,7 +12,9 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
     USER=`echo $i | jq -r .user`
     IP=`echo $i | jq -r .ip`
 
-    ssh -n $USER@$IP "cd ethereum-benchmark && git pull"
+    # ssh -n $USER@$IP "cd ethereum-benchmark && git reset --hard && git pull"
+    ssh -n $USER@$IP "cd ethereum-benchmark/blockchain && npm install"
+    ssh -n $USER@$IP "cd ethereum-benchmark/quorum_Api && npm install"
 
     # if [ $ID -eq 1 ]
     # then
