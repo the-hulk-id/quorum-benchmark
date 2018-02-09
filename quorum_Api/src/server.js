@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
+import moment from 'moment-timezone';
 import { quorumInterface } from '../../blockchain';
 
 process.on('unhandledRejection', function(reason, p) {
@@ -19,12 +20,16 @@ const app = express();
 app.use(bodyParser.text({ type: '*/*' }));
 
 app.post('/send_all/:seq', (req, res) => {
-  quorumInterface.createTransaction(req.params.seq, req.body);
+  var seq = req.params.seq;
+  var data = req.body;
+  quorumInterface.createTransaction(seq, data);
   res.send('Success');
 });
 
 app.post('/send_idp/:seq', (req, res) => {
-  quorumInterface.createTransaction(req.params.seq, req.body);
+  var seq = req.params.seq;
+  var data = req.body;
+  quorumInterface.createTransaction(seq, data);
   res.send('Success');
 });
 

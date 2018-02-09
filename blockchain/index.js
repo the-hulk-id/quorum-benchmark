@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { default as Web3 } from 'web3';
 import { default as truffleContract } from 'truffle-contract';
+import moment from 'moment-timezone';
 
 var fs = require('fs');
 var util = require('util');
@@ -32,26 +33,31 @@ Benchmark.setProvider(provider);
 Benchmark.deployed().then(function(instance) {
   var event = instance.FinishWrite();
   event.watch(function(error, events) {
-    console.log(events.args.sequence.valueOf());
-    logger(
-      new Date().getTime() +
-        '|' +
-        events.args.sequence.valueOf() +
-        '|' +
-        events.args.data.valueOf().length +
-        '|event'
-    );
+    var now = moment()
+      .tz('Asia/Bangkok')
+      .format('YYMMDDHHmmss.SSS');
+    var seq = events.args.sequence.valueOf();
+    var data = events.args.data.valueOf();
+    var sha1 = events.args.sha1.valueOf();
+    var sha2 = events.args.sha1.valueOf();
+    var sha3 = events.args.sha1.valueOf();
+    console.log(now + '|' + seq + '|' + data.length + '|' + 'completedTx');
+    logger(now + '|' + seq + '|' + sha1 + '|' + sha2 + '|' + sha3);
   });
 });
 
 function createTransaction(seq, data) {
-  logger(new Date().getTime() + '|' + seq + '|' + data.length + '|sendTx');
+  var now = moment()
+    .tz('Asia/Bangkok')
+    .format('YYMMDDHHmmss.SSS');
+  // console.log(now + '|' + seq + '|' + data);
+  console.log(now + '|' + seq + '|' + data.length + '|' + 'sendTx');
   Benchmark.deployed().then(function(instance) {
     instance.writeData
       .sendTransaction(seq, data, { from: account, gas: '50000000' })
       .then(function(txhash) {
-        logger(
-          new Date().getTime() + '|' + seq + '|' + data.length + '|sendComplete'
+        console.log(
+          new Date().getTime() + '|' + seq + '|' + data.length + '|gotTx'
         );
       });
   });
