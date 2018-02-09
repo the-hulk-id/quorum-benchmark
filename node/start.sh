@@ -3,7 +3,7 @@ set -u
 set -e
 
 if [ $NODE != "" ]; then
-    echo "[*] Cleaning up temporary data directories"
+   echo "[*] Cleaning up temporary data directories"
 	rm -rf qdata
 	mkdir -p qdata/logs
 
@@ -26,9 +26,10 @@ if [ $NODE != "" ]; then
 	# echo `expr 54000 + $NODE`
 	echo "[*] Starting node $NODE (permissioned)"
 	# PRIVATE_CONFIG=tm$NODE.conf nohup geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport `expr 54000 + $NODE` --rpcport 22000 --port `expr 21000 + $NODE` --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
-	PRIVATE_CONFIG=tm$NODE.conf geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport `expr 54000 + $NODE` --rpcport 22000 --port `expr 21000 + $NODE` --unlock 0 --password passwords.txt
+	# PRIVATE_CONFIG=tm$NODE.conf geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport `expr 54000 + $NODE` --rpcport 22000 --port `expr 21000 + $NODE` --unlock 0 --password passwords.txt
+	PRIVATE_CONFIG=tm$NODE.conf nohup geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport 54000 --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
 
-
+	while true; do sleep 1000; done
 else
     echo "Please input NODE environment"
 fi

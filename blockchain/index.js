@@ -10,7 +10,7 @@ function logger(d) {
   log_file.write(util.format(d) + '\n');
 }
 
-const RPC_HOST = '192.168.100.98';
+const RPC_HOST = 'localhost';
 const RPC_PORT = '22000';
 
 var benchmarkJSON;
@@ -32,6 +32,7 @@ Benchmark.setProvider(provider);
 Benchmark.deployed().then(function(instance) {
   var event = instance.FinishWrite();
   event.watch(function(error, events) {
+    console.log(events.args.sequence.valueOf());
     logger(
       new Date().getTime() +
         '|' +
