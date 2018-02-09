@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
-import moment from 'moment-timezone';
+import RateLimit from 'express-rate-limit';
 import { quorumInterface } from '../../blockchain';
 
 process.on('unhandledRejection', function(reason, p) {
@@ -18,6 +18,15 @@ const app = express();
 
 // --- plaintext ---
 app.use(bodyParser.text({ type: '*/*' }));
+
+var limiter = new RateLimit({
+  delayAfter: 1,
+  delayMs: 1,
+  max: 1000
+});
+
+//  apply to all requests
+app.use(limiter);
 
 app.post('/send_all/:seq', (req, res) => {
   var seq = req.params.seq;

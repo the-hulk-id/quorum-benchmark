@@ -59,7 +59,7 @@ function createTransaction(seq, data) {
         now = moment()
           .tz('Asia/Bangkok')
           .format('YYMMDDHHmmss.SSS');
-        console.log(new now() + '|' + seq + '|' + data.length + '|gotTx');
+        console.log(now + '|' + seq + '|' + data.length + '|gotTx');
       });
   });
 }

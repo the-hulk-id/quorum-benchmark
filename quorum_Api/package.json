@@ -25,6 +25,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "ethereum-encryption": "0.0.3",
     "express": "^4.16.2",
+    "express-rate-limit": "^2.11.0",
     "modern-syslog": "^1.1.4",
     "moment-timezone": "^0.5.14",
     "random-js": "^1.0.8",
