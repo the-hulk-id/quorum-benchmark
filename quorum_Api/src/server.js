@@ -13,11 +13,11 @@ const WEB_SERVER_PORT = process.env.SERVER_PORT || 8181;
 const app = express();
 
 // --- JSON ---
-// app.use(bodyParser.urlencoded({ extended: false, limit: '2mb' }));
-// app.use(bodyParser.json({ limit: '2mb' }));
+app.use(bodyParser.urlencoded({ extended: false, limit: '2mb' }));
+app.use(bodyParser.json({ limit: '2mb' }));
 
 // --- plaintext ---
-app.use(bodyParser.text({ type: '*/*' }));
+// app.use(bodyParser.text({ type: '*/*' }));
 
 // --- TODO use limiter ---
 // var limiter = new RateLimit({
@@ -31,14 +31,16 @@ app.use(bodyParser.text({ type: '*/*' }));
 
 app.post('/send_all/:seq', (req, res) => {
   var seq = req.params.seq;
-  var data = req.body;
+  // var data = req.body;
+  var data = req.body.message;
   quorumInterface.createTransaction(seq, data);
   res.send('Success');
 });
 
 app.post('/send_idp/:seq', (req, res) => {
   var seq = req.params.seq;
-  var data = req.body;
+  // var data = req.body;
+  var data = req.body.message;
   quorumInterface.createTransaction(seq, data);
   res.send('Success');
 });
