@@ -16,6 +16,7 @@
 ### How to run benchmark
  - clone this repository
  - set USER and IP in server.json
+ - set IP in /node/permissioned-nodes.json
  - start geth node via SSH
  ```sh
  ./3_runNode.sh
