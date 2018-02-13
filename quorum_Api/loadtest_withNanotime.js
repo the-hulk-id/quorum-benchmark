@@ -24,11 +24,11 @@ var listIP = [
   '52.230.83.133:8181'
 ];
 
-var startSeq = 1;
+var startSeq = 10001;
 
 var timer = new NanoTimer();
 timer.setInterval(sendTx, '', '5m');
-timer.setTimeout(clearInteval, [timer], '500m');
+timer.setTimeout(clearInteval, [timer], '5001m');
 
 function sendTx(options) {
   if (options == null) {
