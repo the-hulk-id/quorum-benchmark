@@ -16,19 +16,19 @@ function logger(d) {
 
 var size = [128, 512, 1024];
 var listIP = [
-  '52.187.27.143:8181',
-  '52.187.179.80:8181',
-  '52.187.28.154:8181',
-  '52.187.25.120:8181',
-  '52.187.26.77:8181',
-  '52.187.25.18:8181'
+  '52.230.84.50:8181',
+  '52.230.86.140:8181',
+  '52.230.86.10:8181',
+  '52.230.83.10:8181',
+  '52.230.82.125:8181',
+  '52.230.83.133:8181'
 ];
 
 var startSeq = 1;
 
 var timer = new NanoTimer();
 timer.setInterval(sendTx, '', '5m');
-timer.setTimeout(clearInteval, [timer], '50s');
+timer.setTimeout(clearInteval, [timer], '500m');
 
 function sendTx(options) {
   if (options == null) {
