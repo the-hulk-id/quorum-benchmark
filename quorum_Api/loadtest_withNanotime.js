@@ -24,16 +24,21 @@ var listIP = [
   '52.230.83.133:8181'
 ];
 
-var startSeq = 10001;
+var startSeq = 1;
+var round = 0;
 
 var timer = new NanoTimer();
-timer.setInterval(sendTx, '', '5m');
-timer.setTimeout(clearInteval, [timer], '5001m');
+timer.setInterval(sendTx, '', '10m');
+timer.setTimeout(clearInteval, [timer], '50002m');
 
 function sendTx(options) {
+  if (round == 6) round = 0;
+  // console.log(round);
+  var ip = listIP[round++];
+
   if (options == null) {
     options = {
-      url: 'http://' + listIP[random.integer(0, 5)] + '/send_all/' + startSeq++,
+      url: 'http://' + ip + '/send_all/' + startSeq++,
       method: 'POST',
       form: {
         message: randomstring.generate(size[random.integer(0, 2)])
