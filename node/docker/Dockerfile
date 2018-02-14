@@ -9,7 +9,7 @@ RUN apt-get install -y software-properties-common python-software-properties wge
 RUN apt-get install curl -y && curl -sL https://deb.nodesource.com/setup_8.x | bash && apt-get install nodejs
 
 RUN add-apt-repository -y ppa:ethereum/ethereum &&  apt-get update && apt-get install -y solc
-RUN wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.2.0/$CREL.tar.xz && tar xfJ $CREL.tar.xz
+RUN wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.3.0/$CREL.tar.xz && tar xfJ $CREL.tar.xz
 RUN cp $CREL/constellation-node /usr/local/bin && chmod 0755 /usr/local/bin/constellation-node && rm -rf $CREL
 
 RUN wget -q https://storage.googleapis.com/golang/$GOREL && tar xfz $GOREL
