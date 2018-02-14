@@ -1,8 +1,8 @@
 FROM ubuntu
 
-ENV GOREL=go1.7.3.linux-amd64.tar.gz
+ENV GOREL=go1.9.3.linux-amd64.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
-ENV CREL=constellation-0.2.0-ubuntu1604
+ENV CREL=constellation-0.3.0-ubuntu1604
 
 RUN apt-get update &&  apt-get install -y
 RUN apt-get install -y software-properties-common python-software-properties wget git psmisc build-essential unzip libdb-dev libleveldb-dev libsodium-dev zlib1g-dev libtinfo-dev sysvbanner wrk
@@ -17,7 +17,7 @@ RUN mv go /usr/local/go && rm -f $GOREL
 RUN mkdir /home/ubuntu/ && echo 'PATH=$PATH:/usr/local/go/bin' >> /home/ubuntu/.bashrc
 
 RUN git clone https://github.com/jpmorganchase/quorum.git
-RUN cd quorum && git checkout tags/v2.0.0 && make all && cp build/bin/geth /usr/local/bin && cp build/bin/bootnode /usr/local/bin
+RUN cd quorum && git checkout tags/v2.0.1-pre && make all && cp build/bin/geth /usr/local/bin && cp build/bin/bootnode /usr/local/bin
 
 RUN wget -q https://github.com/jpmorganchase/quorum/releases/download/v1.2.0/porosity
 RUN mv porosity /usr/local/bin && chmod 0755 /usr/local/bin/porosity
