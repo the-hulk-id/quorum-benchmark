@@ -3,7 +3,7 @@ set -u
 set -e
 
 if [ $NODE != "" ]; then
-   echo "[*] Cleaning up temporary data directories"
+  echo "[*] Cleaning up temporary data directories"
 	rm -rf qdata
 	mkdir -p qdata/logs
 
@@ -31,5 +31,5 @@ if [ $NODE != "" ]; then
 
 	while true; do sleep 1000; done
 else
-    echo "Please input NODE environment"
+  echo "Please input NODE environment"
 fi
