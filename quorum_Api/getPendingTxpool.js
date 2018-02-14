@@ -2,7 +2,7 @@ var rpc = require('node-json-rpc');
 
 var options = {
   port: 22000,
-  host: '52.187.181.210',
+  host: 'localhost',
   path: '/',
   strict: true
 };

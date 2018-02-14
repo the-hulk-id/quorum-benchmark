@@ -15,7 +15,8 @@ if [ $NODE != "" ]; then
 	cp nodekey/nodekey$NODE qdata/dd$NODE/geth/nodekey
 	geth --datadir qdata/dd$NODE init genesis.json
 
-	GLOBAL_ARGS="--raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum --emitcheckpoints"
+	GLOBAL_ARGS="--raft --raftport 54000 --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum --emitcheckpoints"
+	# GLOBAL_ARGS="--syncmode full --mine --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
 
 	echo "[*] Starting Constellation nodes"
 	nohup constellation-node tm$NODE.conf 2>> qdata/logs/constellation$NODE.log &
@@ -27,7 +28,7 @@ if [ $NODE != "" ]; then
 	echo "[*] Starting node $NODE (permissioned)"
 	# PRIVATE_CONFIG=tm$NODE.conf nohup geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport `expr 54000 + $NODE` --rpcport 22000 --port `expr 21000 + $NODE` --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
 	# PRIVATE_CONFIG=tm$NODE.conf geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport `expr 54000 + $NODE` --rpcport 22000 --port `expr 21000 + $NODE` --unlock 0 --password passwords.txt
-	PRIVATE_CONFIG=tm$NODE.conf nohup geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --raftport 54000 --targetgaslimit 500000000000000000 --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
+	PRIVATE_CONFIG=tm$NODE.conf nohup geth --datadir qdata/dd$NODE $GLOBAL_ARGS --permissioned --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
 
 	while true; do sleep 1000; done
 else
