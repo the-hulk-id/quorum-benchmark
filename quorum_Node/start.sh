@@ -26,6 +26,8 @@ if [ $NODE != "" ]; then
   echo "$CMD >> qdata/logs/constellation$i.log 2>&1 &"
   $CMD >> "qdata/logs/constellation$i.log" 2>&1 &
 
+  sleep 10
+
   echo "[*] Starting Ethereum nodes"
   set -v
   ARGS="--syncmode full --mine --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
