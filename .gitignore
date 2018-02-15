@@ -18,6 +18,8 @@ ethereum_script/nohup.out
 quorum_script/nohup.out
 
 build/
+result/
+log/
 
 contract_addresses.json
 

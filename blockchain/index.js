@@ -54,7 +54,7 @@ function createTransaction(seq, data) {
   console.log(now + '|' + seq + '|' + data.length + '|' + 'sendTx');
   Benchmark.deployed().then(function(instance) {
     instance.writeData
-      .sendTransaction(seq, data, { from: account, gas: '50000000' })
+      .sendTransaction(seq, data, { from: account, gas: '731038' })
       .then(function(txhash) {
         now = moment()
           .tz('Asia/Bangkok')

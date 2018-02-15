@@ -16,20 +16,20 @@ function logger(d) {
 
 var size = [128, 512, 1024];
 var listIP = [
-  '52.230.84.50:8181',
-  '52.230.86.140:8181',
-  '52.230.86.10:8181',
-  '52.230.83.10:8181',
-  '52.230.82.125:8181',
-  '52.230.83.133:8181'
+  'localhost:8181',
+  'localhost:8181',
+  'localhost:8181',
+  'localhost:8181',
+  'localhost:8181',
+  'localhost:8181'
 ];
 
 var startSeq = 1;
 var round = 0;
 
 var timer = new NanoTimer();
-timer.setInterval(sendTx, '', '10m');
-timer.setTimeout(clearInteval, [timer], '50002m');
+timer.setInterval(sendTx, '', '2m');
+timer.setTimeout(clearInteval, [timer], '10002m');
 
 function sendTx(options) {
   if (round == 6) round = 0;
