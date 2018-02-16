@@ -13,10 +13,12 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   IP=`echo $i | jq -r .ip`
 
   # scp -r $PWD/blockchain/index.js $USER@$IP:~/ethereum-benchmark/blockchain/index.js
-  # scp -r $PWD/blockchain/truffle.js $USER@$IP:~/ethereum-benchmark/blockchain/truffle.js
+  # scp -r $PWD/blockchain/contracts/Benchmark.sol $USER@$IP:~/ethereum-benchmark/blockchain/contracts/Benchmark.sol
 
   if [ $ID -eq 1 ]
   then
+    scp -r $PWD/blockchain/contracts/strings.sol $USER@$IP:~/ethereum-benchmark/blockchain/contracts/strings.sol
+    scp -r $PWD/blockchain/contracts/Benchmark.sol $USER@$IP:~/ethereum-benchmark/blockchain/contracts/Benchmark.sol
     ssh -n $USER@$IP "cd ethereum-benchmark/blockchain/ && sudo rm -rf build"
     ssh -n $USER@$IP "cd ethereum-benchmark/blockchain/ && truffle migrate"
     rm -rf $PWD/build
