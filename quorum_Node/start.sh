@@ -30,7 +30,7 @@ if [ $NODE != "" ]; then
 
   echo "[*] Starting Ethereum nodes"
   set -v
-  ARGS="--syncmode full --mine --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
+  ARGS="--mine --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
   PRIVATE_CONFIG=qdata/c$NODE/tm.ipc nohup geth --datadir qdata/dd$NODE $ARGS --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
   set +v
 
