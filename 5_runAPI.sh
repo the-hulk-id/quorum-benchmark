@@ -14,7 +14,7 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
 
   echo "Starting API Server at node $ID"
   ssh -n $USER@$IP "sudo rm -rf api.log result.csv ~/ethereum-benchmark/blockchain/result.csv"
-  scp -r $PWD/blockchain/index.js $USER@$IP:~/ethereum-benchmark/blockchain/index.js
+  # scp -r $PWD/blockchain/index.js $USER@$IP:~/ethereum-benchmark/blockchain/index.js
   # scp -r $PWD/blockchain/truffle.js $USER@$IP:~/ethereum-benchmark/blockchain/truffle.js
   # scp -r $PWD/quorum_Api/src/server.js $USER@$IP:~/ethereum-benchmark/quorum_Api/src/server.js
   ssh -n $USER@$IP bash -c "'
