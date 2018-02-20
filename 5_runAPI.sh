@@ -19,7 +19,7 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   # scp -r $PWD/quorum_Api/src/server.js $USER@$IP:~/ethereum-benchmark/quorum_Api/src/server.js
   ssh -n $USER@$IP bash -c "'
     pkill -9 node
-    cd ethereum-benchmark/quorum_Api/
+    cd ethereum-benchmark/quorum_API/
     nohup npm run api > ~/api.log &
   '"
 done

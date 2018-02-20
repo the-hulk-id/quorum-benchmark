@@ -17,5 +17,5 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   ssh -n $USER@$IP "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
   ssh -n $USER@$IP "sudo apt-get install -y nodejs"
   ssh -n $USER@$IP "cd ethereum-benchmark/blockchain/ && npm install && sudo npm install -g truffle"
-  ssh -n $USER@$IP "cd ethereum-benchmark/quorum_Api/ && npm install"
+  ssh -n $USER@$IP "cd ethereum-benchmark/quorum_API/ && npm install"
 done
