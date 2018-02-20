@@ -13,7 +13,7 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   IP=`echo $i | jq -r .ip`
 
   echo "clone repository at node $ID"
-  ssh -n $USER@$IP "sudo rm -rf api.log ethereum-benchmark"
-  ssh -n $USER@$IP "git clone https://github.com/oatsaysai/ethereum-benchmark.git"
+  ssh -n $USER@$IP "sudo rm -rf api.log quorum-benchmark"
+  ssh -n $USER@$IP "git clone https://github.com/oatsaysai/quorum-benchmark.git"
   # ssh -n $USER@$IP "cd ethereum-benchmark && git reset --hard && git pull"
 done
