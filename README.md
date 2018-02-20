@@ -1,43 +1,79 @@
-## Blockchain Benchmark
- - Quorum blockchain
-
+# Quorum Benchmark
 ### System Requirements
- - Ubuntu 16.04 / OSX
+ - Ubuntu
  - nodejs
  - jq
  
-### Build docker image on azure VM
- - after clone this repository
+### Copy SSH key to all azure VM
  ```sh
+ ssh-copy-id user@host
+ # should can ssh user@host without password
+ ```
+ 
+### Set up user and IP of azure VM
+ ```sh
+ set user and IP in server.json
+ ```
+ 
+### Clone this repository to all azure VM
+ - clone this repository to your machine
+ ```sh
+ ./0_gitClone.sh
+ ```
+ 
+### Build docker image on azure VM
+ - you can use 6 terminal for each VM
+ ```sh
+ # ssh to azure VM
+ ssh user@host
+ # install Docker
+ sudo apt-get install docker.io -y
+ # build docker image
  cd ethereum-benchmark/node/docker/
  docker build -t quorum .
  ```
  
-### How to run benchmark
- - clone this repository
- - set USER and IP in server.json
- - set IP in /node/permissioned-nodes.json
- - start geth node via SSH
+### Install nodejs and dependencies on azure VM
  ```sh
- ./3_runNode.sh
+ ./1_nodeInstall.sh
+ ./2_npmInstall.sh
  ```
- - deploy smart contract via SSH
+ 
+### Run quorum node on azure VM
+ - set IP in /quorum_Node/permissioned-nodes.json
+ ```sh
+ ./3_runQuorumNode.sh
+ ```
+
+### Deploy smart contract on azure VM
  ```sh
  ./4_deployContract.sh
  ```
- - run Restful API via SSH
+ 
+### Run Restful API on azure VM
  ```sh
  ./5_runAPI.sh
  ```
- - test call API
+ 
+### How to send request to Quorum API
+ - use loadtest project
  ```sh
- node quorum_Api/mock_loadtest.js
+ # clone from https://github.com/the-hulk-id/loadtest
+ # Example how to use loadtest
+ node loadtest.js -d 10 -m -100 -s 0 -a 10.0.1.13,8181,10.0.1.14,8181,10.0.1.15,8181,10.0.1.16,8181,10.0.1.17,8181,10.0.1.18,8181
  ```
 
+### Check pending transaction on each node
+ ```sh
+ ./8_getTxpoolStatus.sh
+ ```
 
-node loadtest.js -d 10 -m 1000 -s 0 -a 10.0.1.20,8181,10.0.1.21,8181,10.0.1.22,8181,10.0.1.23,8181,10.0.1.24,8181,10.0.1.25,8181
-
-
- node loadtest.js -d 10 -m 1000 -s 0 -a 10.0.1.13,8181,10.0.1.14,8181,10.0.1.15,8181,10.0.1.16,8181,10.0.1.17,8181,10.0.1.18,8181
-
- node loadtest.js -d 10 -m -100 -s 0 -a 10.0.1.13,8181,10.0.1.14,8181,10.0.1.15,8181,10.0.1.16,8181,10.0.1.17,8181,10.0.1.18,8181
+### Get result from all node
+ ```sh
+ ./7_getResult.sh
+ ```
+ 
+### Stop quorum node on all azure VM
+ ```sh
+ ./6_stopNode.sh
+ ```
