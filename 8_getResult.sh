@@ -23,4 +23,4 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
 done
 
 
-# scp -r ws3@52.163.98.24:~/loadtest/180215144611.txt $PWD/result/input.csv
+# scp -r ws3@52.230.21.161:~/loadtest/180219174236.txt $PWD/result/input.csv

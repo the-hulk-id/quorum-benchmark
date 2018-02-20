@@ -17,10 +17,10 @@ contract('Benchmark', function() {
     // eslint-disable-next-line babel/new-cap
     var watcher = benchmark.FinishWrite();
 
-    await benchmark.writeData(1, 'data');
+    await benchmark.writeData(1, 'testData');
     let events = await watcher.get();
     console.log(events);
     assert.equal(events.length, 1);
-    assert.equal(events[0].args.data.valueOf(), 'data');
+    assert.equal(events[0].args.data.valueOf(), 'testData');
   });
 });

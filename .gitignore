@@ -21,6 +21,8 @@ build/
 result/
 log/
 
+result.csv
+
 contract_addresses.json
 
 # OSX
