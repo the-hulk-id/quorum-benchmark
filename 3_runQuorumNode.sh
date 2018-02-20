@@ -12,13 +12,9 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   USER=`echo $i | jq -r .user`
   IP=`echo $i | jq -r .ip`
 
-  echo "start API at node $ID"
-  ssh -n $USER@$IP "sudo rm -rf api.log result.csv ~/ethereum-benchmark/blockchain/result.csv"
-  ssh -n $USER@$IP bash -c "'
-    pkill -9 node
-    cd ethereum-benchmark/quorum_API/
-    nohup npm run api > ~/api.log &
-  '"
+  echo "run docker quorum at node $ID"
+  ssh -n $USER@$IP "docker rm quorum -f"
+  ssh -n $USER@$IP "docker run -d -e 'NODE=$ID' --name quorum -p 22000:22000 -p 21000:21000 -p 54000:54000 -v ~/ethereum-benchmark/quorum_Node:/quorum_script quorum"
 done
 
-sleep 5
+sleep 10

@@ -12,7 +12,6 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   USER=`echo $i | jq -r .user`
   IP=`echo $i | jq -r .ip`
 
-  # scp -r $PWD/quorum_Api/getPendingTxpool.js $USER@$IP:~/ethereum-benchmark/quorum_Api/getPendingTxpool.js
-  echo "Node $ID"
-  ssh -n $USER@$IP "node ethereum-benchmark/quorum_Api/getPendingTxpool.js"
+  ssh -n $USER@$IP "docker rm quorum -f"
+  ssh -n $USER@$IP "killall node"
 done

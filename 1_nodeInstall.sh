@@ -7,20 +7,14 @@ else
   sudo apt install jq
 fi
 
-rm -rf result
-mkdir result
-
-rm -rf log
-mkdir log
-
 jq -c '.[] | { id, user, ip}' server.json | while read i; do
   ID=`echo $i | jq -r .id`
   USER=`echo $i | jq -r .user`
   IP=`echo $i | jq -r .ip`
 
-  scp -r $USER@$IP:~/ethereum-benchmark/blockchain/result.csv $PWD/result/output_node$ID.csv
-  scp -r $USER@$IP:~/api.log $PWD/log/node$ID.log 
+  echo "install nodejs at node $ID"
+  ssh -n $USER@$IP "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
+  ssh -n $USER@$IP "sudo apt-get install -y nodejs"
+  ssh -n $USER@$IP "sudo apt install -y node-gyp"
+  ssh -n $USER@$IP "sudo npm install -g truffle"
 done
-
-
-# scp -r ws3@52.230.21.161:~/loadtest/180219174236.txt $PWD/result/input.csv
