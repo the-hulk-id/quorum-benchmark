@@ -2,6 +2,7 @@
 import { default as Web3 } from 'web3';
 import { default as truffleContract } from 'truffle-contract';
 import moment from 'moment-timezone';
+import crypto from 'crypto';
 
 var fs = require('fs');
 var util = require('util');
@@ -44,6 +45,20 @@ Benchmark.deployed().then(function(instance) {
     console.log(now + '|' + seq + '|' + data.length + '|' + 'completedTx');
     logger(now + '|' + seq + '|' + sha1 + '|' + sha2 + '|' + sha3);
   });
+
+  var eventWithoutHash = instance.FinishWriteWithoutHash();
+  eventWithoutHash.watch(function(error, events) {
+    var now = moment()
+      .tz('Asia/Bangkok')
+      .format('YYMMDDHHmmss.SSS');
+    var seq = events.args.sequence.valueOf();
+    var data = events.args.data.valueOf();
+    var sha1 = events.args.sha1.valueOf();
+    var sha2 = events.args.sha1.valueOf();
+    var sha3 = events.args.sha1.valueOf();
+    console.log(now + '|' + seq + '|' + data.length + '|' + 'completedTx');
+    logger(now + '|' + seq + '|' + sha1 + '|' + sha2 + '|' + sha3);
+  });
 });
 
 function createTransaction(seq, data) {
@@ -55,6 +70,39 @@ function createTransaction(seq, data) {
   Benchmark.deployed().then(function(instance) {
     instance.writeData
       .sendTransaction(seq, data, { from: account, gas: '50000000' })
+      .then(function(txhash) {
+        now = moment()
+          .tz('Asia/Bangkok')
+          .format('YYMMDDHHmmss.SSS');
+        console.log(now + '|' + seq + '|' + data.length + '|gotTx');
+      });
+  });
+}
+
+function createTransactionWithoutHash(seq, data) {
+  const hash1 = crypto.createHash('sha256');
+  hash1.update('testData1');
+  let sha1 = hash1.digest('hex');
+
+  const hash2 = crypto.createHash('sha256');
+  hash2.update('testData2');
+  let sha2 = hash2.digest('hex');
+
+  const hash3 = crypto.createHash('sha256');
+  hash3.update('testData3');
+  let sha3 = hash3.digest('hex');
+
+  var now = moment()
+    .tz('Asia/Bangkok')
+    .format('YYMMDDHHmmss.SSS');
+
+  Benchmark.deployed().then(function(instance) {
+    console.log(now + '|' + seq + '|' + data.length + '|' + 'sendTx');
+    instance.writeDataWithoutHash
+      .sendTransaction(seq, data, sha1, sha2, sha3, {
+        from: account,
+        gas: '50000000'
+      })
       .then(function(txhash) {
         now = moment()
           .tz('Asia/Bangkok')
