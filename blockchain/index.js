@@ -80,17 +80,24 @@ function createTransaction(seq, data) {
 }
 
 function createTransactionWithoutHash(seq, data) {
-  const hash1 = crypto.createHash('sha256');
-  hash1.update('testData1');
-  let sha1 = hash1.digest('hex');
+  // const hash1 = crypto.createHash('sha256');
+  // hash1.update('testData1');
+  // let sha1 = hash1.digest('hex');
 
-  const hash2 = crypto.createHash('sha256');
-  hash2.update('testData2');
-  let sha2 = hash2.digest('hex');
+  // const hash2 = crypto.createHash('sha256');
+  // hash2.update('testData2');
+  // let sha2 = hash2.digest('hex');
 
-  const hash3 = crypto.createHash('sha256');
-  hash3.update('testData3');
-  let sha3 = hash3.digest('hex');
+  // const hash3 = crypto.createHash('sha256');
+  // hash3.update('testData3');
+  // let sha3 = hash3.digest('hex');
+
+  let sha1 =
+    '0x0bfd6eb4141fb315aaad04a62ac238fa0959bf610bd8e18cd9a97f5e0977a99b';
+  let sha2 =
+    '0x0bfd6eb4141fb315aaad04a62ac238fa0959bf610bd8e18cd9a97f5e0977a99b';
+  let sha3 =
+    '0x0bfd6eb4141fb315aaad04a62ac238fa0959bf610bd8e18cd9a97f5e0977a99b';
 
   var now = moment()
     .tz('Asia/Bangkok')
@@ -113,7 +120,8 @@ function createTransactionWithoutHash(seq, data) {
 }
 
 export const quorumInterface = {
-  createTransaction
+  createTransaction,
+  createTransactionWithoutHash
 };
 
 export default quorumInterface;

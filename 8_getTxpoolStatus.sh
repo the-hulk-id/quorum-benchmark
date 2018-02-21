@@ -13,5 +13,5 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   IP=`echo $i | jq -r .ip`
 
   echo "Node $ID"
-  ssh -n $USER@$IP "node ethereum-benchmark/quorum_API/getPendingTxpool.js"
+  ssh -n $USER@$IP "node quorum-benchmark/quorum_API/getPendingTxpool.js"
 done

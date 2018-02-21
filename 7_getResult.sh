@@ -19,6 +19,6 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   IP=`echo $i | jq -r .ip`
 
   echo "get result at node $ID"
-  scp -r $USER@$IP:~/ethereum-benchmark/blockchain/result.csv $PWD/result/output_node$ID.csv
+  scp -r $USER@$IP:~/quorum-benchmark/blockchain/result.csv $PWD/result/output_node$ID.csv
   scp -r $USER@$IP:~/api.log $PWD/log/node$ID.log 
 done

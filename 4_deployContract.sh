@@ -15,13 +15,13 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   if [ $ID -eq 1 ]
   then
     echo "deploy contract at node $ID"
-    ssh -n $USER@$IP "cd ethereum-benchmark/blockchain/ && sudo rm -rf build"
-    ssh -n $USER@$IP "cd ethereum-benchmark/blockchain/ && truffle migrate"
+    ssh -n $USER@$IP "cd quorum-benchmark/blockchain/ && sudo rm -rf build"
+    ssh -n $USER@$IP "cd quorum-benchmark/blockchain/ && truffle migrate"
     rm -rf $PWD/build
-    scp -r $USER@$IP:~/ethereum-benchmark/blockchain/build $PWD/
+    scp -r $USER@$IP:~/quorum-benchmark/blockchain/build $PWD/
   else
     echo "copy contract to node $ID"
-    ssh -n $USER@$IP "cd ethereum-benchmark/blockchain/ && sudo rm -rf build"
-    scp -r $PWD/build $USER@$IP:~/ethereum-benchmark/blockchain
+    ssh -n $USER@$IP "cd quorum-benchmark/blockchain/ && sudo rm -rf build"
+    scp -r $PWD/build $USER@$IP:~/quorum-benchmark/blockchain
   fi
 done

@@ -33,8 +33,8 @@ app.post('/send_all/:seq', (req, res) => {
   var seq = req.params.seq;
   // var data = req.body;
   var data = req.body.message;
-  // quorumInterface.createTransaction(seq, data);
-  quorumInterface.createTransactionWithoutHash(seq, data);
+  quorumInterface.createTransaction(seq, data);
+  // quorumInterface.createTransactionWithoutHash(seq, data);
   res.send('Success');
 });
 
@@ -42,8 +42,8 @@ app.post('/send_idp/:seq', (req, res) => {
   var seq = req.params.seq;
   // var data = req.body;
   var data = req.body.message;
-  // quorumInterface.createTransaction(seq, data);
-  quorumInterface.createTransactionWithoutHash(seq, data);
+  quorumInterface.createTransaction(seq, data);
+  // quorumInterface.createTransactionWithoutHash(seq, data);
   res.send('Success');
 });
 
