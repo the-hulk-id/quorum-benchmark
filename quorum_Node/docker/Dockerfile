@@ -23,4 +23,4 @@ RUN cd quorum && git checkout tags/v2.0.1 && make all && cp build/bin/geth /usr/
 RUN wget -q https://github.com/jpmorganchase/quorum/releases/download/v1.2.0/porosity
 RUN mv porosity /usr/local/bin && chmod 0755 /usr/local/bin/porosity
 
-ENTRYPOINT cd quorum_script && ./start && /bin/bash
+ENTRYPOINT cd quorum_script && ./start.sh && /bin/bash
