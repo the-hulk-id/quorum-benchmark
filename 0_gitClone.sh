@@ -16,4 +16,6 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   ssh -n $USER@$IP "sudo rm -rf api.log quorum-benchmark"
   ssh -n $USER@$IP "git clone https://github.com/oatsaysai/quorum-benchmark.git"
   # ssh -n $USER@$IP "cd quorum-benchmark && git reset --hard && git pull"
+  # ssh -n $USER@$IP "docker rm -f quorum && docker image rm -f quorum"
+  # ssh -n $USER@$IP "cd quorum-benchmark/blockchain && npm install ether-pudding --save-dev"
 done

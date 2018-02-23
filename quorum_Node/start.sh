@@ -21,18 +21,25 @@ if [ $NODE != "" ]; then
   mkdir -p qdata/logs
   cp "keys/tm$i.pub" "$DDIR/tm.pub"
   cp "keys/tm$i.key" "$DDIR/tm.key"
-  rm -f "$DDIR/tm.ipc"
-  CMD="constellation-node --url=https://127.0.0.$i:900$i/ --port=900$i --workdir=$DDIR --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/"
-  echo "$CMD >> qdata/logs/constellation$i.log 2>&1 &"
-  $CMD >> "qdata/logs/constellation$i.log" 2>&1 &
+  cp "config/tm$i.conf" "$DDIR/tm.conf"
+  chmod 0600 $DDIR/tm.key
+
+  nohup constellation-node $DDIR/tm.conf &> qdata/logs/constellation$i.log &
 
   sleep 10
 
   echo "[*] Starting Ethereum nodes"
-  set -v
-  ARGS="--fast --mine --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
-  PRIVATE_CONFIG=qdata/c$NODE/tm.ipc nohup geth --datadir qdata/dd$NODE $ARGS --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/$NODE.log &
-  set +v
+
+
+  FLAGS="--datadir qdata/dd$NODE --shh --port 21000 --unlock 0 --password passwords.txt --syncmode full --mine --nodiscover"
+
+  RPC_API="admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
+  HTTP_RPC_ARGS="--rpc --rpcaddr 0.0.0.0 --rpcport 22000 --rpcapi $RPC_API"
+  WS_RPC_ARGS="--ws --wsaddr 0.0.0.0 --wsport 23000 --wsapi $RPC_API --wsorigins=*"
+
+  ALL_ARGS="$FLAGS $HTTP_RPC_ARGS $WS_RPC_ARGS"
+
+  PRIVATE_CONFIG=$DDIR/tm.conf nohup geth $ALL_ARGS --targetgaslimit 50000000 &> qdata/logs/$NODE.log &
 
   while true; do sleep 1000; done
 else

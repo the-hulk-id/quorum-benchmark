@@ -13,6 +13,7 @@ jq -c '.[] | { id, user, ip}' server.json | while read i; do
   IP=`echo $i | jq -r .ip`
 
   echo "run docker quorum at node $ID"
+  # scp -r $PWD/quorum_Node/start.sh $USER@$IP:~/quorum-benchmark/quorum_Node/start.sh
   scp -r $PWD/quorum_Node/permissioned-nodes.json $USER@$IP:~/quorum-benchmark/quorum_Node/permissioned-nodes.json
   ssh -n $USER@$IP "docker rm quorum -f"
   ssh -n $USER@$IP "docker run -d -e 'NODE=$ID' --name quorum -p 22000:22000 -p 21000:21000 -p 54000:54000 -v ~/quorum-benchmark/quorum_Node:/quorum_script quorum"

@@ -29,8 +29,7 @@
  # install Docker
  sudo apt-get install docker.io -y
  # build docker image
- cd ethereum-benchmark/node/docker/
- docker build -t quorum .
+ cd quorum-benchmark/quorum_Node/docker/ && docker build -t quorum .
  ```
  
 ### Install nodejs and dependencies on azure VM

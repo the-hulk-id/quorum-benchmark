@@ -2,14 +2,14 @@ import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import RateLimit from 'express-rate-limit';
-import { quorumInterface } from '../../blockchain';
+import { default as yargs } from 'yargs';
+import { default as quorumInterface } from '../../blockchain';
 
 process.on('unhandledRejection', function(reason, p) {
   console.error('Unhandled Rejection:', p, '\nreason:', reason.stack || reason);
 });
 
 const WEB_SERVER_PORT = process.env.SERVER_PORT || 8181;
-
 const app = express();
 
 // --- JSON ---
@@ -33,7 +33,7 @@ app.post('/send_all/:seq', (req, res) => {
   var seq = req.params.seq;
   // var data = req.body;
   var data = req.body.message;
-  quorumInterface.createTransaction(seq, data);
+  quorumInterface.createTransaction(seq, data, yargs.argv.node);
   // quorumInterface.createTransactionWithoutHash(seq, data);
   res.send('Success');
 });
@@ -42,7 +42,7 @@ app.post('/send_idp/:seq', (req, res) => {
   var seq = req.params.seq;
   // var data = req.body;
   var data = req.body.message;
-  quorumInterface.createTransaction(seq, data);
+  quorumInterface.createTransaction(seq, data, yargs.argv.node);
   // quorumInterface.createTransactionWithoutHash(seq, data);
   res.send('Success');
 });
