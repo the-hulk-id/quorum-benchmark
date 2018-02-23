@@ -18,7 +18,7 @@ RUN mv go /usr/local/go && rm -f $GOREL
 RUN mkdir /home/ubuntu/ && echo 'PATH=$PATH:/usr/local/go/bin' >> /home/ubuntu/.bashrc
 
 RUN git clone https://github.com/jpmorganchase/quorum.git
-RUN cd quorum && git checkout tags/v2.0.1 && make all && cp build/bin/geth /usr/local/bin && cp build/bin/bootnode /usr/local/bin
+RUN cd quorum && git pull && make all && cp build/bin/geth /usr/local/bin && cp build/bin/bootnode /usr/local/bin
 
 RUN wget -q https://github.com/jpmorganchase/quorum/releases/download/v1.2.0/porosity
 RUN mv porosity /usr/local/bin && chmod 0755 /usr/local/bin/porosity
