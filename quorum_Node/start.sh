@@ -36,6 +36,7 @@ if [ $NODE != "" ]; then
   RPC_API="admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
   HTTP_RPC_ARGS="--rpc --rpcaddr 0.0.0.0 --rpcport 22000 --rpcapi $RPC_API"
   WS_RPC_ARGS="--ws --wsaddr 0.0.0.0 --wsport 23000 --wsapi $RPC_API --wsorigins=*"
+  ISTANBUK_ARGS="--istanbul.requesttimeout 10000 --istanbul.blockperiod 1 --istanbul.blockpausetime 2"
 
   ALL_ARGS="$FLAGS $HTTP_RPC_ARGS $WS_RPC_ARGS"
 
