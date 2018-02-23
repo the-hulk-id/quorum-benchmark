@@ -6,14 +6,15 @@ var fs = require('fs');
 var objJSON = {};
 
 module.exports = function(deployer) {
+  // --- Deploy public smart contract ---
   deployer.deploy(Benchmark).then(() => {
     objJSON[Benchmark.contractName] = Benchmark.address;
   });
+
+  // --- Deploy private smart contract ---
   // deployer
   //   .deploy(Benchmark, {
   //     privateFor: [
-  //       'QfeDAys9MPDs2XHExtc84jKGHxZg/aj52DTh0vtA3Xc=',
-  //       '1iTZde/ndBHvzhcl7V68x44Vx7pl8nwx9LqnM/AfJUg=',
   //       'oNspPPgszVUFw0qmGFfWwh1uxVUXgvBxleXORHj07g8=',
   //       'R56gy4dn24YOjwyesTczYa8m5xhP6hF2uTMCju/1xkY=',
   //       'UfNSeSGySeKg11DVNEnqrUtxYRVor4+CvluI8tVv62Y='

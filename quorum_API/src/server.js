@@ -34,7 +34,6 @@ app.post('/send_all/:seq', (req, res) => {
   // var data = req.body;
   var data = req.body.message;
   quorumInterface.createTransaction(seq, data, yargs.argv.node);
-  // quorumInterface.createTransactionWithoutHash(seq, data);
   res.send('Success');
 });
 
@@ -43,7 +42,6 @@ app.post('/send_idp/:seq', (req, res) => {
   // var data = req.body;
   var data = req.body.message;
   quorumInterface.createTransaction(seq, data, yargs.argv.node);
-  // quorumInterface.createTransactionWithoutHash(seq, data);
   res.send('Success');
 });
 

@@ -76,22 +76,43 @@ function createTransaction(seq, data, node) {
     });
 }
 
-function createTransactionWithoutHash(seq, data) {
-  // const hash1 = crypto.createHash('sha256');
-  // hash1.update('testData1');
-  // let sha1 = hash1.digest('hex');
+function createPrivateTransaction(seq, data, node) {
+  var now = moment()
+    .tz('Asia/Bangkok')
+    .format('YYMMDDHHmmss.SSS');
 
-  // const hash2 = crypto.createHash('sha256');
-  // hash2.update('testData2');
-  // let sha2 = hash2.digest('hex');
+  var instance = Benchmark.at(addressObj.Benchmark);
+  console.log(now + '|' + seq + '|' + data.length + '|' + 'sendTx');
+  instance.writeData
+    .sendTransaction(seq, data, {
+      from: account,
+      gas: '50000000',
+      privateFor: [
+        'oNspPPgszVUFw0qmGFfWwh1uxVUXgvBxleXORHj07g8=',
+        'R56gy4dn24YOjwyesTczYa8m5xhP6hF2uTMCju/1xkY=',
+        'UfNSeSGySeKg11DVNEnqrUtxYRVor4+CvluI8tVv62Y='
+      ]
+    })
+    .then(function(txhash) {
+      now = moment()
+        .tz('Asia/Bangkok')
+        .format('YYMMDDHHmmss.SSS');
+      console.log(now + '|' + seq + '|' + data.length + '|gotTx');
+    });
+}
 
-  // const hash3 = crypto.createHash('sha256');
-  // hash3.update('testData3');
-  // let sha3 = hash3.digest('hex');
+function createTransactionHashExternal(seq, data) {
+  const hash1 = crypto.createHash('sha256');
+  hash1.update('testData1');
+  let sha1 = hash1.digest('hex');
 
-  let sha1 = '1111111';
-  let sha2 = '2222222';
-  let sha3 = '3333333';
+  const hash2 = crypto.createHash('sha256');
+  hash2.update('testData2');
+  let sha2 = hash2.digest('hex');
+
+  const hash3 = crypto.createHash('sha256');
+  hash3.update('testData3');
+  let sha3 = hash3.digest('hex');
 
   var now = moment()
     .tz('Asia/Bangkok')
@@ -114,7 +135,8 @@ function createTransactionWithoutHash(seq, data) {
 
 export const quorumInterface = {
   createTransaction,
-  createTransactionWithoutHash
+  createPrivateTransaction,
+  createTransactionHashExternal
 };
 
 export default quorumInterface;
