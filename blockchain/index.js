@@ -50,8 +50,8 @@ event.watch(function(error, events) {
   var seq = events.args.sequence.valueOf();
   var data = events.args.data.valueOf();
   var sha1 = events.args.sha1.valueOf();
-  var sha2 = events.args.sha1.valueOf();
-  var sha3 = events.args.sha1.valueOf();
+  var sha2 = events.args.sha2.valueOf();
+  var sha3 = events.args.sha3.valueOf();
   console.log(now + '|' + seq + '|' + data.length + '|' + 'completedTx');
   logger(now + '|' + seq + '|' + sha1 + '|' + sha2 + '|' + sha3);
 });
